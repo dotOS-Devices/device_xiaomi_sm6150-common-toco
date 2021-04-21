@@ -22,6 +22,7 @@
 
 #include <fstream>
 
+#define PANEL_LED           "/sys/class/backlight/panel0-backlight/"
 #define NOTIFICATION_LED_LEFT(x) "/sys/class/leds/left/" + x
 #define NOTIFICATION_LED_WHITE(x) "/sys/class/leds/white/" + x
 
@@ -105,6 +106,11 @@ static inline uint32_t getScaledBrightness(const LightState& state, uint32_t max
     return scaleBrightness(getBrightness(state), maxBrightness);
 }
 
+static void handleBacklight(const LightState& state) {
+    uint32_t brightness = getScaledBrightness(state, getMaxBrightness(PANEL_LED MAX_BRIGHTNESS));
+    set(PANEL_LED BRIGHTNESS, brightness);
+}
+
 static void handleNotification(const LightState& state) {
     uint32_t notificationBrightness = getScaledBrightness(state, getMaxBrightness(MAX_BRIGHTNESS));
 
@@ -148,6 +154,7 @@ static std::vector<LightBackend> backends = {
     { Type::ATTENTION, handleNotification },
     { Type::NOTIFICATIONS, handleNotification },
     { Type::BATTERY, handleNotification },
+    { Type::BACKLIGHT, handleBacklight },
 };
 
 static LightStateHandler findHandler(Type type) {
