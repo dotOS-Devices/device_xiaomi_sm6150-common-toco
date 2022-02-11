@@ -472,6 +472,7 @@ vendor/lib64/libmlipay.so
 vendor/lib64/libmlipay@1.1.so
 vendor/lib64/vendor.xiaomi.hardware.mlipay@1.0.so
 vendor/lib64/vendor.xiaomi.hardware.mlipay@1.1.so
+vendor/lib64/vendor.xiaomi.hardware.mtdservice@1.0.so
 
 # Peripheral - from LA.UM.9.1.r1-10900-SMxxx0.0
 vendor/bin/pm-proxy|0704192692efb4b79e8cb1a2252625ad24468805
